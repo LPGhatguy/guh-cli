@@ -3,6 +3,18 @@
 const path = require("path");
 const fs = require("fs");
 
+let guh;
+
+try {
+	guh = require(path.join(process.cwd(), "node_modules/guh-core"));
+} catch(e) {
+	if (e.code === "MODULE_NOT_FOUND" && e.message.includes("guh-core")) {
+		console.error("Local guh not installed!");
+		console.error("Run 'npm install guh-core --save-dev'");
+		process.exit(1);
+	}
+}
+
 function isFile(filePath) {
 	let stat;
 
@@ -33,11 +45,17 @@ function useGulp() {
 
 // guh-core 3.0 project
 function useGuh() {
-	const buildPath = path.join(process.cwd(), "build.js");
+	const buildPath = path.join(process.cwd(), "build.conf.js");
 
 	if (isFile(buildPath)) {
-		require(buildPath);
-		return true;
+		const config = require(buildPath);
+
+		if (config) {
+			return config;
+		} else {
+			console.error("build.conf.js didn't return a configuration to use!");
+			process.exit(1);
+		}
 	}
 
 	return false;
@@ -48,7 +66,15 @@ function build() {
 		return;
 	}
 
-	if (useGuh()) {
+	const config = useGuh();
+	if (config) {
+		const host = new guh.Host();
+
+		host
+			.configure(config)
+			.configure(host.argBuilder.parse(process.argv.slice(3)))
+			.start();
+
 		return;
 	}
 
