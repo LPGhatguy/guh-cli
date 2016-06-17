@@ -1,0 +1,27 @@
+{
+  "name": "guh-cli",
+  "version": "3.0.0-alpha1",
+  "description": "The command line interface for guh",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "bin": {
+    "guh2": "bin/guh.js"
+  },
+  "engines": {
+    "node": ">=5.0"
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LPGhatguy/guh-cli.git"
+  },
+  "author": "Lucien Greathouse <me@lpghatguy.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LPGhatguy/guh-cli/issues"
+  },
+  "homepage": "https://github.com/LPGhatguy/guh-cli#readme"
+}
