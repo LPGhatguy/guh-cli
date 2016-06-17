@@ -7,7 +7,7 @@
   "devDependencies": {
   },
   "bin": {
-    "guh2": "bin/guh.js"
+    "guh3": "bin/guh.js"
   },
   "engines": {
     "node": ">=5.0"
